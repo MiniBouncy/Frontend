@@ -36,12 +36,13 @@ app.controller('totalsCtrl', function ($scope, $http) {
 	        for(b = 0 ; b <response.data.dates.length ; b++){
 	        	var date = new Date(response.data.dates[b]*1000);
 				var year = date.getFullYear(),
+				year = year.toString().substr(2,2),
 				month = ('0' + (date.getMonth() + 1)).slice(-2),
 				day = ('0' + date.getDate()).slice(-2);	
-				var finalDates = day + '-' + month + '-' + year;
+				var finalDates = day + '-' + month + '-`' + year;
 				dates.push(finalDates);
 	        }
-	        
+
 	        $(window).load(function() {
 				// Animate loader off screen
 				$(".se-pre-con").fadeOut("slow");;
@@ -52,7 +53,7 @@ app.controller('totalsCtrl', function ($scope, $http) {
 			    	exporting: { enabled: true },
 			        chart: {
 			            type: 'line',
-			            width: 800,
+			            width: 1500,
 			            height: 800,
 			        },
 			        title: {
@@ -156,18 +157,42 @@ app.controller('vulnQuantityCtrl', function ($scope, $http) {
     
 });
 app.controller('incGraphCtrl', function ($scope, $http) {
-		$http({
-	        method: 'GET',
-	        url: 'http://localhost:3000/graphs/getIncidents'
-	    }).then(function successCallback(response) {
-	        $scope.critCurr = response.data.msg.critical;
-	        $scope.highCurr = response.data.msg.high;
-	        $scope.medCurr = response.data.msg.med;
-	        $scope.lowCurr = response.data.msg.low;
-	        $scope.infoCurr = response.data.msg.info;
-	        $scope.totalCurr = response.data.msg.total;
-	        
-	    }, function errorCallback(response) {
-	        console.log(response);
-	    });
+			$http({
+		        method: 'POST',
+		        url: 'http://localhost:3000/graphs/getIncidents'
+		    }).then(function successCallback(response) {
+		        $scope.critCurr = response.data.msg.critical;
+		        $scope.highCurr = response.data.msg.high;
+		        $scope.medCurr = response.data.msg.med;
+		        $scope.lowCurr = response.data.msg.low;
+		        $scope.infoCurr = response.data.msg.info;
+		        $scope.totalCurr = response.data.msg.total;
+		        
+		    }, function errorCallback(response) {
+		        console.log(response);
+		    });
+});
+
+app.controller('scanIDCtrl', function ($scope, $http) {
+	document.getElementById('searchBtn').onclick = function() {
+		var inputs = document.getElementById('searchID');
+		console.log(inputs.value);
+			$http({
+		        method: 'POST',
+		        url: 'http://localhost:3000/graphs/getIncidents',
+		        data: {
+		        	scan_id: inputs.value
+		        }
+		    }).then(function successCallback(response) {
+		        $scope.critCurr = response.data.msg.critical;
+		        $scope.highCurr = response.data.msg.high;
+		        $scope.medCurr = response.data.msg.med;
+		        $scope.lowCurr = response.data.msg.low;
+		        $scope.infoCurr = response.data.msg.info;
+		        $scope.totalCurr = response.data.msg.total;
+		        
+		    }, function errorCallback(response) {
+		        console.log(response);
+		    });
+	};
 });

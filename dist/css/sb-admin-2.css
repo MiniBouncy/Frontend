@@ -12,8 +12,8 @@ body {
 }
 
 #totalGraph, #vulnQuantityGraph {
-  width: 1000px; 
-  height: 1000px;
+    width: 1000px; 
+    height: 1000px;
 }
 #wrapper {
     width: 100%;

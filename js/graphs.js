@@ -41,6 +41,11 @@ app.controller('totalsCtrl', function ($scope, $http) {
 				var finalDates = day + '-' + month + '-' + year;
 				dates.push(finalDates);
 	        }
+	        
+	        $(window).load(function() {
+				// Animate loader off screen
+				$(".se-pre-con").fadeOut("slow");;
+			});
 
 	         $(function () {
 			    $('#totalGraph').highcharts({
@@ -93,7 +98,7 @@ app.controller('totalsCtrl', function ($scope, $http) {
 	        
 
 	    }, function errorCallback(response) {
-	        console.log('Connection error: '+JSON.parse(response));
+	        console.log(response);
 	    });
     
 });
@@ -146,19 +151,23 @@ app.controller('vulnQuantityCtrl', function ($scope, $http) {
 	        
 
 	    }, function errorCallback(response) {
-	        console.log('Connection error: '+JSON.parse(response));
+	        console.log(response);
 	    });
     
 });
 app.controller('incGraphCtrl', function ($scope, $http) {
-	console.log('dash');
 		$http({
 	        method: 'GET',
 	        url: 'http://localhost:3000/graphs/getIncidents'
 	    }).then(function successCallback(response) {
-	        console.log('dash: '+response);
+	        $scope.critCurr = response.data.msg.critical;
+	        $scope.highCurr = response.data.msg.high;
+	        $scope.medCurr = response.data.msg.med;
+	        $scope.lowCurr = response.data.msg.low;
+	        $scope.infoCurr = response.data.msg.info;
+	        $scope.totalCurr = response.data.msg.total;
 	        
 	    }, function errorCallback(response) {
-	        console.log('Connection error: '+JSON.parse(response));
+	        console.log(response);
 	    });
 });

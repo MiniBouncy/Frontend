@@ -15,7 +15,6 @@
     <link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
     <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
     <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
 </head>
 
 <body ng-app="frontApp">
@@ -41,7 +40,7 @@
                             <a href="totals.html"><i class="fa fa-line-chart"></i> Totals</a>
                         </li>
                         <li>
-                            <a href="vulnQuantity.html"><i class="fa fa-bar-chart"></i> Impacted Hosts</a>
+                            <a href="vulnQuantity.html"><i class="fa fa-bar-chart"></i> Top Vulnerabilities</a>
                         </li>
                     </ul>
                 </div>
@@ -52,7 +51,10 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">Totals Graph</h1>
-                            <div id="totalGraph" ng-controller="totalsCtrl">
+                            <div class="preload">
+                                <img src="../dist/images/Loading_icon.gif"/>
+                            </div>
+                            <div id="totalGraph" class="content"ng-controller="totalsCtrl">
                                 <canvas id="totalsGraph"></canvas>
                             </div>                
                     </div>
@@ -61,9 +63,17 @@
         </div>
     </div>
 
-    <script src="../bower_components/angular/angular.js"></script>
     <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script>
+    $(function() {
+        $(".preload").fadeOut(2000, function() {
+            $(".content").fadeIn(1000);
+        });
+    });
+
+    </script>    
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../bower_components/angular/angular.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="../js/graphs.js"></script>
     <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -71,5 +81,4 @@
     <script src="../dist/js/sb-admin-2.js"></script>
 
 </body>
-
 </html>

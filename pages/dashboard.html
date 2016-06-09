@@ -18,7 +18,7 @@
 
 </head>
 
-<body>
+<body ng-app="frontApp">
 
     <div id="wrapper">
 
@@ -54,7 +54,7 @@
                             <a href="totals.html"><i class="fa fa-line-chart"></i> Totals</a>
                         </li>
                         <li>
-                            <a href="vulnQuantity.html"><i class="fa fa-bar-chart"></i> Impacted Hosts</a>
+                            <a href="vulnQuantity.html"><i class="fa fa-bar-chart"></i> Top Vulnerabilities</a>
                         </li>
                     </ul>
                 </div>
@@ -64,20 +64,20 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Dashboard</h1>
-                    <div ng-controller="incGraphCtrl">
-                    
-                    </div> 
+                    <h1 class="page-header">Top Vulnerabilities</h1>
                 </div>
             </div>
 
-            <div class="row">
+            <div class="preload">
+                <img src="../dist/images/Loading_icon.gif"/>
+            </div>
+            <div class="content" ng-controller="incGraphCtrl">
                 <div class="col-lg-2 col-md-6">
                     <div class="panel panel-red">
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">26</div>
+                                    <div class="huge">{{critCurr}}</div>
                                     <div>Critical</div>
                                 </div>
                             </div>
@@ -96,7 +96,7 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">12</div>
+                                    <div class="huge">{{highCurr}}</div>
                                     <div>High</div>
                                 </div>
                             </div>
@@ -115,7 +115,7 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">124</div>
+                                    <div class="huge">{{medCurr}}</div>
                                     <div>Medium</div>
                                 </div>
                             </div>
@@ -134,7 +134,7 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">13</div>
+                                    <div class="huge">{{lowCurr}}</div>
                                     <div>Low</div>
                                 </div>
                             </div>
@@ -153,7 +153,7 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">13</div>
+                                    <div class="huge">{{infoCurr}}</div>
                                     <div>Informational</div>
                                 </div>
                             </div>
@@ -172,7 +172,7 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">13</div>
+                                    <div class="huge">{{totalCurr}}</div>
                                     <div>Total</div>
                                 </div>
                             </div>
@@ -189,6 +189,15 @@
             </div>
         </div>
 
+        <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+        <script>
+        $(function() {
+            $(".preload").fadeOut(2000, function() {
+                $(".content").fadeIn(1000);
+            });
+        });
+
+        </script>    
         <script src="../bower_components/angular/angular.js"></script>
         <script src="../js/graphs.js"></script>
         <script src="../bower_components/jquery/dist/jquery.min.js"></script>

@@ -41,7 +41,7 @@
                             <a href="totals.html"><i class="fa fa-line-chart"></i> Totals</a>
                         </li>
                         <li>
-                            <a href="vulnQuantity.html"><i class="fa fa-bar-chart"></i> Impacted Hosts</a>
+                            <a href="vulnQuantity.html"><i class="fa fa-bar-chart"></i> Top Vulnerabilities</a>
                         </li>
                     </ul>
                 </div>
@@ -52,17 +52,29 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">Impacted Hosts</h1>
-                            <div id="vulnQuantityGraph" ng-controller="vulnQuantityCtrl">
+                            <div class="preload">
+                                <img src="../dist/images/Loading_icon.gif"/>
+                            </div>
+                            <div id="vulnQuantityGraph" class="content" ng-controller="vulnQuantityCtrl">
                                 <canvas id="vulnQuantityGraph"></canvas>
-                            </div>                
+                            </div>               
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="../bower_components/angular/angular.js"></script>
     <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script>
+    $(function() {
+        $(".preload").fadeOut(2000, function() {
+            $(".content").fadeIn(1000);
+        });
+    });
+
+    </script>    
+
+    <script src="../bower_components/angular/angular.js"></script>
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="../js/graphs.js"></script>
